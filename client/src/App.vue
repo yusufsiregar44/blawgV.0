@@ -1,10 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
+    <footer class="footer has-text-centered" style="height: 70px">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-8-desktop is-offset-2-desktop">
+            <p>
+              <strong class="has-text-weight-semibold">
+                Made with <i class="fas fa-heart" style="color:#FF1493"></i> By <a href="https://github.com/yusufsiregar44" style="color:#3273dc">Yusuf Siregar</a>
+              </strong>
+            </p>
+            <p>
+              <small>
+                <a href="https://github.com/yusufsiregar44/blawgV.0" style="color:#3273dc">blawgV.0</a> is licensed under <a href="http://opensource.org/licenses/mit-license.php" style="color:#3273dc">MIT</a>
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
