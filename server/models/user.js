@@ -12,7 +12,10 @@ const userSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  fbid: String,
+  role:  {
+    type: String,
+    require: true,
+  },
   password: {
     type: String,
     minlength: 8,

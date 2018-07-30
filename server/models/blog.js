@@ -15,12 +15,16 @@ const blogSchema = Schema({
   }],
   mediaURI: {
     type: String,
+    required: true,
+  },
+  comments: {
+    type: Array,
   },
   writer: {
     type: String,
-    // type: Schema.Types.ObjectId,
-    // ref: 'User',
-    // required: true,
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
 },  {
   timestamps: {
