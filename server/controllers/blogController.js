@@ -4,6 +4,7 @@ class BlogController {
   static create(req, res) {
     blog.create({
       title: req.body.title,
+      subtitle: req.body.subtitle,
       content: req.body.content,
       tags: req.body.tags,
       mediaURI: req.body.mediaURI,
@@ -53,6 +54,7 @@ class BlogController {
   static updateById(req, res) {
     blog.findByIdAndUpdate(req.params.id, {
       title: req.body.title,
+      subtitle: req.body.subtitle,
       content: req.body.content,
       tags: req.body.tags,
       mediaURI: req.body.mediaURI,

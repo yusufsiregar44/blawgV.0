@@ -80,24 +80,12 @@ export default {
     ...mapState([ 'readerIsLoggedIn', 'writerIsLoggedIn' ])
   },
   methods: {
-    // ...mapActions([ 'adminLogIn', 'adminLogOut' ]),
-    // login() {
-    //   this.adminLogIn({email: this.email, pass: this.password})
-    //   .catch(() => {
-    //     // eslint-disable-next-line
-    //     this.$toast.open({
-    //       duration: 1000,
-    //       message: 'Kindly enter a valid email/password',
-    //       position: 'is-top',
-    //       type: 'is-danger'
-    //     });
-    //   });
-    // },
     logout() {
       localStorage.clear();
       this.$store.commit('assignReaderIsLoggedIn', false);
       this.$store.commit('assignWriterIsLoggedIn', false);
       this.$store.commit('assignUsername', null);
+      this.$store.commit('assignUserID', null);
       this.$toast.open({
           duration: 1000,
           message: 'Successfully logged out',

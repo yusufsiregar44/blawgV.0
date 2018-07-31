@@ -27,10 +27,11 @@ import { mapActions } from 'vuex';
 
 export default {
   methods: {
-    ...mapActions([ 'decodeToken' ]),
+    ...mapActions([ 'decodeToken', 'getAllBlogs' ]),
   },
   created() {
     this.decodeToken();
+    this.getAllBlogs();
   },
 }
 

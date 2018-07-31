@@ -59,6 +59,7 @@ export default {
          })
          .then((decoded) => {
           this.$store.commit('assignUsername', decoded.data.name)
+          this.$store.commit('assignUserID', decoded.data._id)
            if (decoded.data.role === 'writer') {
              this.$store.commit('assignWriterIsLoggedIn', true)
              this.$router.push({

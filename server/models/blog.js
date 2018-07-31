@@ -6,6 +6,9 @@ const blogSchema = Schema({
     type: String,
     required: true,
   },
+  subtitle: {
+    type: String,
+  },
   content: {
     type: String,
     required: true,

@@ -15,10 +15,18 @@ export default new Vuex.Store({
     readerIsLoggedIn: false,
     writerIsLoggedIn: false,
     username: null,
+    userID: null,
+    allBlogs: null,
   },
   mutations: {
+    assignAllBlogs(state, payload) {
+      return state.allBlogs = payload;
+    },
     assignUsername(state, payload) {
       return state.username = payload;
+    },
+    assignUserID(state, payload) {
+      return state.userID = payload;
     },
     assignReaderIsLoggedIn(state, payload) {
       return state.readerIsLoggedIn = payload;
@@ -45,6 +53,7 @@ export default new Vuex.Store({
           })
           .then((decoded) => {
             commit('assignUsername', decoded.data.name)
+            commit('assignUserID', decoded.data._id)
             if (decoded.data.role === 'writer') {
                           // eslint-disable-next-line
               console.log('masuk');
@@ -67,6 +76,12 @@ export default new Vuex.Store({
         // eslint-disable-next-line
         console.log('gamasuk');
       }
+    },
+    getAllBlogs({ commit }) {
+      axios.get('http://localhost:3000/blogs')
+      .then((response) => {
+        commit('assignAllBlogs', response.data);
+      })
     },
   }
 })
