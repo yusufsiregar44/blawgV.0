@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import router from './router.js';
 import axios from 'axios';
 import Buefy from 'buefy'
+
 Vue.use(Buefy, {
   defaultIconPack: 'fas',
 });
@@ -13,8 +14,12 @@ export default new Vuex.Store({
   state: {
     readerIsLoggedIn: false,
     writerIsLoggedIn: false,
+    username: null,
   },
   mutations: {
+    assignUsername(state, payload) {
+      return state.username = payload;
+    },
     assignReaderIsLoggedIn(state, payload) {
       return state.readerIsLoggedIn = payload;
     },
@@ -24,14 +29,44 @@ export default new Vuex.Store({
   },
   actions: {
     register(context, payload) {
-      // eslint-disable-next-line
-      console.log(payload);
      return axios.post(`http://localhost:3000/users/register`, {
         name: payload.name,
         email: payload.email,
         password: payload.password,
         role: 'reader',
       });
-    }
+    },
+    decodeToken({ commit }) {
+      if (localStorage.token) {
+        axios.get('http://localhost:3000/authentication', {
+            'headers': {
+              'token': localStorage.token,
+            },
+          })
+          .then((decoded) => {
+            commit('assignUsername', decoded.data.name)
+            if (decoded.data.role === 'writer') {
+                          // eslint-disable-next-line
+              console.log('masuk');
+              commit('assignWriterIsLoggedIn', true)
+              router.push({
+                name: 'writer',
+                query: {
+                  redirect: '/writer'
+                }
+              });
+            } else {
+              commit('assignReaderIsLoggedIn', true)
+            }
+          })
+          .catch((err) => {
+            // eslint-disable-next-line
+            console.log(err);
+          });
+      } else {
+        // eslint-disable-next-line
+        console.log('gamasuk');
+      }
+    },
   }
 })

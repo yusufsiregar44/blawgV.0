@@ -3,14 +3,16 @@ const router = express.Router();
 
 const blogController = require('../controllers/blogController');
 
-router.post('/', blogController.create);
+const authentication = require('../middlewares/authentication');
+
+router.post('/', authentication.verifyToken, blogController.create);
 
 router.get('/', blogController.readAll);
 
 router.get('/:id', blogController.readById);
 
-router.put('/:id', blogController.updateById);
+router.put('/:id', authentication.verifyToken, blogController.updateById);
 
-router.delete('/:id', blogController.deleteById);
+router.delete('/:id', authentication.verifyToken, blogController.deleteById);
 
 module.exports = router;

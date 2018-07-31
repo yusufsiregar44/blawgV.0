@@ -14,7 +14,7 @@
       </div>
       <div class="navbar-menu">
         <div class="navbar-end">
-          <a class="navbar-item">
+          <a class="navbar-item" v-if="readerIsLoggedIn === false && writerIsLoggedIn === false">
             <a class="button is-inverted" @click="isLoginModalActive = true">
               <span class="icon">
                 <i class="fas fa-sign-in-alt"></i>
@@ -40,12 +40,14 @@
             </b-modal>
           </a>
 
-            <!-- <a class="button is-inverted" @click="logout()" v-if="userLoggedIn === true">
-              <span class="icon">
-                <i class="fas fa-sign-out-alt"></i>
-              </span>
-              <span>Admin Logout</span>
-            </a> -->
+          <a class="navbar-item" v-if="readerIsLoggedIn === true || writerIsLoggedIn === true">
+             <a class="button is-inverted" @click="logout">
+               <span class="icon">
+                 <i class="fas fa-sign-out-alt"></i>
+               </span>
+               <span>Logout</span>
+             </a>
+          </a>
 
         </div>
       </div>
@@ -54,7 +56,7 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex';
+import { mapState } from 'vuex';
 // import { mapActions } from 'vuex';
 import RegisterModal from '../components/RegisterModal.vue'
 import LoginModal from '../components/LoginModal.vue'
@@ -75,7 +77,7 @@ export default {
     };
   },
   computed: {
-    // ...mapState([ 'cartArr', 'adminIsLoggedIn' ])
+    ...mapState([ 'readerIsLoggedIn', 'writerIsLoggedIn' ])
   },
   methods: {
     // ...mapActions([ 'adminLogIn', 'adminLogOut' ]),
@@ -91,32 +93,19 @@ export default {
     //     });
     //   });
     // },
-    // logout() {
-    //   this.adminLogOut()
-    //   .then(() => {
-    //     this.$toast.open({
-    //       duration: 1000,
-    //       message: 'Successfully logged out',
-    //       position: 'is-top',
-    //       type: 'is-success'
-    //     });
-    //     this.$router.push({ name: 'home', query: { redirect: '/' } })
-    //   })
-    //   .catch(() => {
-    //     this.$toast.open({
-    //       duration: 1000,
-    //       message: 'Oops. something went wrong. Pleas try again.',
-    //       position: 'is-top',
-    //       type: 'is-danger'
-    //     });
-      // })
-  //   },
-  //   updateEmail(e) {
-  //     this.email = e;
-  //   },
-  //   updatePassword(e) {
-  //     this.password = e;
-  //   },
+    logout() {
+      localStorage.clear();
+      this.$store.commit('assignReaderIsLoggedIn', false);
+      this.$store.commit('assignWriterIsLoggedIn', false);
+      this.$store.commit('assignUsername', null);
+      this.$toast.open({
+          duration: 1000,
+          message: 'Successfully logged out',
+          position: 'is-top',
+          type: 'is-success',
+      });
+      this.$router.push({ name: 'home', query: { redirect: '/' } })
+    },
   },
 }
 </script>

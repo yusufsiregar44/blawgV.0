@@ -22,6 +22,22 @@
   </div>
 </template>
 
+<script>
+import { mapActions } from 'vuex';
+
+export default {
+  methods: {
+    ...mapActions([ 'decodeToken' ]),
+  },
+  created() {
+    this.decodeToken();
+  },
+}
+
+
+
+</script>
+
 <style lang="scss">
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";

@@ -24,7 +24,7 @@
 <script>
 import EmailField from '../components/EmailField.vue';
 import PasswordField from '../components/PasswordField.vue';
-// import { mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import axios from 'axios'
 
 export default {
@@ -39,6 +39,7 @@ export default {
     PasswordField,
   },
   methods: {
+    ...mapActions([ 'decodeToken' ]),
     updateEmail(e) {
       this.email = e;
     },
@@ -50,17 +51,47 @@ export default {
          email: this.email,
          password: this.password,
        }).then((response) => {
-         localStorage.userJwt = response.data;
-         this.$toast.open({
-           duration: 2500,
-           message: 'Successfully logged in',
-           position: 'is-top',
-           type: 'is-success'
-         });
-         this.$parent.close();
-         this.$store.commit('assignReaderIsLoggedIn', true);
+         localStorage.token = response.data;
+         axios.get(`http://localhost:3000/authentication`, {
+           'headers': {
+             'token': localStorage.token,
+           } ,
+         })
+         .then((decoded) => {
+          this.$store.commit('assignUsername', decoded.data.name)
+           if (decoded.data.role === 'writer') {
+             this.$store.commit('assignWriterIsLoggedIn', true)
+             this.$router.push({
+               name: 'writer',
+               query: {
+                 redirect: '/writer'
+               }
+             })
+           } else {
+             this.$store.commit('assignReaderIsLoggedIn', true)
+           }
+           this.$toast.open({
+             duration: 2500,
+             message: 'Successfully logged in',
+             position: 'is-top',
+             type: 'is-success'
+           });
+           this.$parent.close();
+         })
+         .catch((err) => {
+          // eslint-disable-next-line
+           console.log(err);
+           this.$toast.open({
+             duration: 2500,
+             message: 'Oops. something went wrong. Please try again',
+             position: 'is-top',
+             type: 'is-danger'
+           });
+         })
        })
-       .catch(() => {
+       .catch((err) => {
+         // eslint-disable-next-line
+          console.log(err);
           this.$toast.open({
             duration: 2500,
             message: 'Oops. something went wrong. Please enter a valid email/password',

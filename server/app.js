@@ -43,7 +43,7 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/blogs', authentication.verifyToken, blogsRouter);
+app.use('/blogs', blogsRouter);
 app.use('/authentication', authenticationRouter);
 
 // catch 404 and forward to error handler
