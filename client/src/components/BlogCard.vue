@@ -7,9 +7,11 @@
         <p class="title">{{ blog.title }}</p>
         <p class="subtitle is-6">{{ blog.subtitle }}</p>
       </div>
-        <a class="button" style="margin: 10px">
+      <a class="button" style="margin: 10px">
+      <router-link :to="`/blog/${blog._id}`">
           See full post
-        </a>
+      </router-link>
+    </a>
     </div>
 </template>
 

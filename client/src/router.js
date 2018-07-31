@@ -19,7 +19,7 @@ export default new Router({
       component: Writer,
     },
     {
-      path: '/blog',
+      path: '/blog/:id',
       name: 'blog',
       component: Blog,
     }

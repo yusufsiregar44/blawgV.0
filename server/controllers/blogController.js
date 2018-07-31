@@ -58,7 +58,7 @@ class BlogController {
       content: req.body.content,
       tags: req.body.tags,
       mediaURI: req.body.mediaURI,
-      writer: req.body.writer,
+      comments: req.body.comments,
     }, function (err, response) {
       if (err) {
         res

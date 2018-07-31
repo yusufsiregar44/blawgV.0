@@ -2,10 +2,12 @@
   <nav class="navbar is-transparent">
     <div class="container">
       <div class="navbar-brand">
+        <router-link :to="`/`">
         <a class="navbar-item">
-          <i class="fab fa-pied-piper-pp" style="font-size:37px; margin-right:10px; color:#363636"></i>
-          <h1 class="title">blawgV.0</h1>
+            <i class="fab fa-pied-piper-pp" style="font-size:37px; margin-right:10px; color:#363636"></i>
+            <h1 class="title">blawgV.0</h1>
         </a>
+      </router-link>
         <span class="navbar-burger burger" data-target="navbarMenuHeroB">
             <span></span>
         <span></span>
