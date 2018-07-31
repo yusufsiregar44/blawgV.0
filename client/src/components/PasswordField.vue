@@ -7,6 +7,7 @@
           required
           v-model="content"
           @input="handleInput"
+          minlength="8"
           >
       </b-input>
   </b-field>

@@ -14,7 +14,6 @@
       </div>
       <div class="navbar-menu">
         <div class="navbar-end">
-          <!-- <b-dropdown position="is-bottom-left"> -->
           <a class="navbar-item">
             <a class="button is-inverted" @click="isLoginModalActive = true">
               <span class="icon">
@@ -41,12 +40,12 @@
             </b-modal>
           </a>
 
-            <a class="button is-inverted" @click="logout()" v-if="userLoggedIn === true">
+            <!-- <a class="button is-inverted" @click="logout()" v-if="userLoggedIn === true">
               <span class="icon">
                 <i class="fas fa-sign-out-alt"></i>
               </span>
               <span>Admin Logout</span>
-            </a>
+            </a> -->
 
         </div>
       </div>

@@ -6,14 +6,14 @@
       </header>
       <section class="modal-card-body">
 
-        <EmailField></EmailField>
+        <EmailField @input="updateEmail"></EmailField>
 
-        <PasswordField></PasswordField>
+        <PasswordField @input="updatePassword"></PasswordField>
 
       </section>
       <footer class="modal-card-foot">
         <div class="container">
-          <button class="button is-success">Login</button>
+          <button class="button is-success" @click="loginUser">Login</button>
         </div>
       </footer>
     </div>
@@ -22,14 +22,54 @@
 </template>
 
 <script>
-import EmailField from '../components/EmailField.vue'
-import PasswordField from '../components/PasswordField.vue'
+import EmailField from '../components/EmailField.vue';
+import PasswordField from '../components/PasswordField.vue';
+// import { mapActions } from 'vuex';
+import axios from 'axios'
 
 export default {
+  data() {
+    return {
+      email: null,
+      password: null,
+    };
+  },
   components: {
     EmailField,
     PasswordField,
   },
+  methods: {
+    updateEmail(e) {
+      this.email = e;
+    },
+    updatePassword(e) {
+      this.password = e;
+    },
+    loginUser() {
+      axios.post(`http://localhost:3000/users/login`, {
+         email: this.email,
+         password: this.password,
+       }).then((response) => {
+         localStorage.userJwt = response.data;
+         this.$toast.open({
+           duration: 2500,
+           message: 'Successfully logged in',
+           position: 'is-top',
+           type: 'is-success'
+         });
+         this.$parent.close();
+         this.$store.commit('assignReaderIsLoggedIn', true);
+       })
+       .catch(() => {
+          this.$toast.open({
+            duration: 2500,
+            message: 'Oops. something went wrong. Please enter a valid email/password',
+            position: 'is-top',
+            type: 'is-danger'
+          });
+       })
+    }
+  }
 }
 </script>
 

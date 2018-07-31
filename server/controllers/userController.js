@@ -10,6 +10,7 @@ class UserController {
         user.create({
             email: req.body.email,
             name: req.body.name,
+            role: req.body.role,
             password: encryptedPsw,
           })
           .then((response) => {
@@ -51,6 +52,7 @@ class UserController {
               _id: userData[0]._id,
               name: userData[0].name,
               email: userData[0].email,
+              role: userData[0].role,
             }, process.env.JWT_SECRET_KEY, function (err, newlyCreatedJwtToken) {
               if (err) {
                 res
