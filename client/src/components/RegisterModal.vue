@@ -15,7 +15,7 @@
     </section>
     <footer class="modal-card-foot">
       <div class="container">
-        <button class="button is-primary">Register</button>
+        <button class="button is-success">Register</button>
       </div>
     </footer>
   </div>
