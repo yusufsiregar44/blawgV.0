@@ -37,7 +37,7 @@ export default new Vuex.Store({
   },
   actions: {
     register(context, payload) {
-     return axios.post(`http://localhost:3000/users/register`, {
+     return axios.post(`http://35.240.188.49/users/register`, {
         name: payload.name,
         email: payload.email,
         password: payload.password,
@@ -46,7 +46,7 @@ export default new Vuex.Store({
     },
     decodeToken({ commit }) {
       if (localStorage.token) {
-        axios.get('http://localhost:3000/authentication', {
+        axios.get('http://35.240.188.49/authentication', {
             'headers': {
               'token': localStorage.token,
             },
@@ -78,7 +78,7 @@ export default new Vuex.Store({
       }
     },
     getAllBlogs({ commit }) {
-      axios.get('http://localhost:3000/blogs')
+      axios.get('http://35.240.188.49/blogs')
       .then((response) => {
         commit('assignAllBlogs', response.data);
       })

@@ -90,7 +90,7 @@ export default {
       });
     },
     executeRemove() {
-      axios.delete(`http://localhost:3000/blogs/${this.blog._id}`, {
+      axios.delete(`http://35.240.188.49/blogs/${this.blog._id}`, {
         'headers' : {
           'token' : localStorage.token,
         }
@@ -109,7 +109,7 @@ export default {
     },
 
     update() {
-      axios.put(`http://localhost:3000/blogs/${this.blog._id}`, {
+      axios.put(`http://35.240.188.49/blogs/${this.blog._id}`, {
         title: this.title,
         subtitle: this.subtitle,
         content: this.content,

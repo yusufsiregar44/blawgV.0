@@ -47,12 +47,12 @@ export default {
       this.password = e;
     },
     loginUser() {
-      axios.post(`http://localhost:3000/users/login`, {
+      axios.post(`http://35.240.188.49/users/login`, {
          email: this.email,
          password: this.password,
        }).then((response) => {
          localStorage.token = response.data;
-         axios.get(`http://localhost:3000/authentication`, {
+         axios.get(`http://35.240.188.49/authentication`, {
            'headers': {
              'token': localStorage.token,
            } ,

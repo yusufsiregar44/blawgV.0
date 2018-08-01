@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     getBlogById() {
-      axios.get(`http://localhost:3000/blogs/${this.$route.params.id}`)
+      axios.get(`http://35.240.188.49/blogs/${this.$route.params.id}`)
       .then((response) => {
         this.blogData = response.data;
       })
@@ -91,7 +91,7 @@ export default {
           owner: this.username,
           content: this.commentContent,
         })
-        axios.put(`http://localhost:3000/blogs/${this.$route.params.id}`, {
+        axios.put(`http://35.240.188.49/blogs/${this.$route.params.id}`, {
           title: this.blogData.title,
           subtitle: this.blogData.subtitle,
           content: this.blogData.content,

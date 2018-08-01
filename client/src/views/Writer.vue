@@ -79,7 +79,7 @@ export default {
       }
     },
     add() {
-      axios.post(`http://localhost:3000/blogs`, {
+      axios.post(`http://35.240.188.49/blogs`, {
         title: this.title,
         subtitle: this.subtitle,
         content: this.content,
