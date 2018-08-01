@@ -3,7 +3,7 @@
     <Navbar></Navbar>
     <div class="container">
       <BlogCard v-for="(blog, index) in allBlogs" v-bind:key="(index)" :blog="blog"></BlogCard>
-  </div>
+    </div>
   </div>
 </template>
 
