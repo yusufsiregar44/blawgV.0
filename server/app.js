@@ -14,7 +14,7 @@ var authenticationRouter = require('./routes/authentication');
 
 const authentication = require('./middlewares/authentication');
 
-const config = require('./config');
+const config = require('./config.js');
 
 const dbURI = config.db.uri;
 

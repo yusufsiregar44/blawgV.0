@@ -2,23 +2,31 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const blog = require('../models/blog');
+const user = require('../models/user');
 const app = require('../app');
 
 chai.use(chaiHttp);
 
 describe('Blog', function () {
-  // before(function (done) {
-  //   blog.create({
-  //     title: 'et dolor',
-  //     content: 'lorem ipsum',
-  //     tags: ['culture', 'politics'],
-  //     mediaURI: 'http://apakek',
-  //     writer: 'TBD',
-  //   }, function (err) {
-  //     done();
-  //   });
-  // });
   this.timeout(10000)
+  before(function (done) {
+    user.create({
+      name: 'asdfhfjaha',
+      email: 'ndask1das@gmail.com',
+      password: 'jdassandlkndndjadsd',
+      role: 'writer',
+    }, function (user) {
+      blog.create({
+        title: 'et dolor',
+        content: 'lorem ipsum',
+        tags: ['culture', 'politics'],
+        mediaURI: 'http://apakek',
+        writer: user._id,
+      }, function (err) {
+        done();
+      });
+    })
+  });
   it('should create a SINGLE blog on /blogs POST', function (done) {
     chai.request(app)
       .post('/blogs')
@@ -131,6 +139,36 @@ describe('Blog', function () {
       // console.log('sinii----2');
       done();
     });
+  });
+
+});
+
+describe('User', function () {
+  this.timeout(10000)
+
+  it('should create a SINGLE user on /users POST', function (done) {
+    chai.request(app)
+      .post('/users/register')
+      .send({
+        "name": "Muhammabs1",
+        "email": "231jn213n23n2@mail.com",
+        "password": "jnwqjmdsmsnww",
+        "role": "writer",
+      })
+      .end(function (err, res) {
+        // console.log(res);
+        res.should.have.status(200);
+        res.body.should.be.an('object');
+        res.body.should.have.property('name');
+        res.body.title.should.be.a('string');
+        res.body.should.have.property('email');
+        res.body.content.should.be.a('string');
+        res.body.should.have.property('password');
+        res.body.writer.should.be.a('string');
+        res.body.should.have.property('role');
+        res.body.writer.should.be.a('string');
+        done();
+      });
   });
 
 });
